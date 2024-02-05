@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { writeFile } from 'fs/promises';
-import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
-import * as csurf from 'csurf';
+import helmet from 'helmet';
+// import rateLimit from 'express-rate-limit';
+// import csurf from 'csurf';
 
 import { AppModule } from './app.module';
 
@@ -11,7 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Security middlewares
-  // app.use(helmet());
+  app.use(helmet());
   // app.use(csurf());
   // app.use(
   //   rateLimit({

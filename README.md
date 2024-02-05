@@ -89,7 +89,7 @@ npm run test:cov
 npm run test:e2e
 ```
 
-Test case need to be added
+Test cases need to be added
 
 ## Author
 
