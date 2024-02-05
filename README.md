@@ -1,73 +1,96 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Wikipedia Search and Analysis Tool - Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is the backend server for the Wikipedia Search and Analysis Tool, built with Nest.js.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project Overview
 
-## Description
+The backend server manages Wikipedia API interactions from multiple users, emphasizing performance and secure interactions and also provides API's for basic authentication of user.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Installation
+- **Basic Auth:** Added API's for authenticating user, using basic auth and persisting the user records in Postgres DB
+- **Search Results:** Provided paginated API's to Process and serve search results from the Wikipedia API.
+- **Search History:** Keeping track of user search history and persisting the same in DB. Also provided paginated API's for fetching the same.
+- **Page Content:** Get the page content of wikipedia search
+
+## Setup Instructions
+
+1. Clone the backend repository:
+
+   ```bash
+   git clone git@github.com:maaizelahi/wikipedia-search-service.git
+   cd wikipedia-search-service
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables (refer to .env.example).
+4. Set up PostgreSQL database:
+   []Create a PostgreSQL database.
+   []Update the .env file with your PostgreSQL connection details.
+
+   ```bash
+   DB_HOST=your_postgres_host
+   DB_PORT=your_postgres_port
+   DB_USER=your_postgres_user
+   DB_PASSWORD=your_postgres_password
+   DB_NAME=your_postgres_database
+   ```
+
+5. Run the server:
+
+   ```bash
+   npm start
+   ```
+
+   The server will be running on http://localhost:3333 by default.
+
+6. Accessing API Swagger Docs
+
+   ```bash
+   http://localhost:3333/docs
+   ```
+
+![Alt Text](./swagger-docs.png)
+
+## Project Structure
+
+- src/main.ts: Entry file.
+- src/app.module.ts: Main module.
+- src/modules: Contains other modules such as auth and search. Modules have controller, service, entities, dtos encapsulated within thier respective folders.
+- src/middleware: Folder holding AuthMiddleware.
+- src/helpers: For all the utility functions
+- config.ts: Contains all the config values
+
+## Performance Optimization
+
+- Paginated API's
+
+## Security
+
+- Added user Authentication
+- Doing Request validation
+- Have setup http security headers using [helmet](https://docs.nestjs.com/security/helmet)
+- Have setup [CORS](https://docs.nestjs.com/security/cors)
+- Storing hashed password using bcrypt
+- Have introduced ratelimiting to prevent DDos
+- Implement clear and consistent error messages to avoid exposing internal details or stack traces
+- Expiring auth token after sometime
+
+## Testing
 
 ```bash
-$ npm install
+npm run test
+npm run test:cov
+npm run test:e2e
 ```
 
-## Running the app
+Test case need to be added
 
-```bash
-# development
-$ npm run start
+## Author
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Maaiz Elahi
